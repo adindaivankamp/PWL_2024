@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route; //mengimpor kelas Route yang digunakan untuk mendefinisikan routes.
+use App\Http\Controllers\ItemController; //mengimpor controller ItemController yang akan menangani request yang terkait dengan "item".
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function () { //mendefinisikan route untuk path (jalur) /. 
+    return view('welcome'); //mengembalikan view bernama welcome.
 });
+
+Route::resource('items', ItemController::class); //membuat beberapa route sekaligus untuk operasi CRUD (Create, Read, Update, Delete) pada "items".
