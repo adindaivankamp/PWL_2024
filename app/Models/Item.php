@@ -10,6 +10,6 @@ class Item extends Model
     use HasFactory;
     protected $fillable = [ // Atribut yang dapat diisi
         'name',
-    'description',
+        'description',
     ];
 }
