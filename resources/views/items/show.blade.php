@@ -9,7 +9,7 @@
 <body>
     <h1>Items</h1>
 
-    @if(session('success'))
+    @if(session('success'));
         <p>{{ session('success') }}</p>
     @endif {{--direktif Blade yang memeriksa apakah ada pesan sukses dalam session. Jika ada, pesan tersebut akan ditampilkan dalam tag <p>--}}
 
