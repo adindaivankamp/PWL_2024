@@ -1,8 +1,13 @@
 <?php
 
-
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route; //mengimpor kelas Route yang digunakan untuk mendefinisikan routes.
 use App\Http\Controllers\ItemController; //mengimpor controller ItemController yang akan menangani request yang terkait dengan "item".
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +26,7 @@ Route::get('/', function () { //mendefinisikan route untuk path (jalur) /.
 
 Route::resource('items', ItemController::class); //membuat beberapa route sekaligus untuk operasi CRUD (Create, Read, Update, Delete) pada "items".
 
-Route::get('/hello', function () { 
-    return 'Hello World';
-});
+Route::get('/hello', [WelcomeController::class, 'hello']);
 
 Route::get('/world', function () { 
     return 'World';
@@ -33,10 +36,10 @@ Route::get('/sd', function() {
     return 'Selamat Datang';
 });
 
-Route::get('/about', function() {
-    return 'Nama : Adinda Ivanka Maysanda Putri, 
-    NIM : 2341760058';
-});
+// Route::get('/about', function() {
+//     return 'Nama : Adinda Ivanka Maysanda Putri, 
+//     NIM : 2341760058';
+// });
 
 Route::get('/user/{name}', function ($name) { 
     return 'Nama saya '.$name;
@@ -46,12 +49,25 @@ Route::get('/posts/{post}/comments/{comment}', function ($postId, $commentId) {
     return 'Pos ke-'.$postId." Komentar ke-: ".$commentId;
 });
     
-Route::get('/articles/{Id}', function($Id) {
-    return 'Halaman Artikel dengan ID : '. $Id;
-});
+// Route::get('/articles/{Id}', function($Id) {
+//     return 'Halaman Artikel dengan ID : '. $Id;
+// });
 
 Route::get('/user/{name?}', function ($name='John') { 
     return 'Nama saya '.$name;
 });
 
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/about', [AboutController::class, 'about']);
+Route::get('/articles/{id}', [ArticleController::class, 'articles']);
+
+Route::resource('photos', PhotoController::class);
+
+Route::resource('photos', PhotoController::class)->only([
+    'index', 'show'
+]);
+
+Route::resource('photos', PhotoController::class)->except([
+    'create', 'store', 'update', 'destroy'
+]);
 
